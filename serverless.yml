@@ -1,16 +1,16 @@
-service: FreeWork
+service: freework
 
 frameworkVersion: '3'
 
 provider:
   name: aws
   runtime: java8
-  stage: dev
+  stage: prd
   region: us-east-1
 
 functions:
   hello:
-    handler: com.freework.Handler
+    handler: com.freework.handler.Handler
     timeout: 60 #seconds
     memorySize: 128 #mb
 

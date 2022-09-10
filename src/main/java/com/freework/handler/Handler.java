@@ -1,8 +1,10 @@
-package com.freework;
+package com.freework.handler;
 
 import java.util.Collections;
 import java.util.Map;
 
+import com.freework.ApiGatewayResponse;
+import com.freework.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
