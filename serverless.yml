@@ -10,7 +10,7 @@ provider:
 
 functions:
   hello:
-    handler: com.serverless.Handler
+    handler: com.freework.Handler
     timeout: 60 #seconds
     memorySize: 128 #mb
 
