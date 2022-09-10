@@ -8,9 +8,6 @@ provider:
   stage: dev
   region: us-east-1
 
-package:
-  artifact: target/freework.jar
-
 functions:
   hello:
     handler: com.serverless.Handler
