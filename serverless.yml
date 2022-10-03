@@ -10,18 +10,6 @@ provider:
 
 functions:
   hello:
-    handler: com.freework.handler.Handler
+    handler: com.freework.handler.CadastroUsuarioHandler
     timeout: 60 #seconds
     memorySize: 128 #mb
-
-# you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
