@@ -8,6 +8,9 @@ provider:
   stage: prd
   region: us-east-1
 
+package:
+  artifact: target/freework-prd.jar
+
 functions:
   hello:
     handler: com.freework.handler.CadastroUsuarioHandler
