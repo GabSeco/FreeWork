@@ -15,4 +15,3 @@ functions:
   hello:
     handler: com.freework.handler.CadastroUsuarioHandler
     timeout: 60 #seconds
-    memorySize: 128 #mb
