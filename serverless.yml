@@ -5,11 +5,11 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: java8
-  stage: dev
+  stage: prd
   region: us-east-1
 
 package:
-  artifact: target/freework-dev.jar
+  artifact: target/freework-prd.jar
 
 functions:
   cadastrarUsuario:

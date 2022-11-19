@@ -4,7 +4,7 @@
   <groupId>com.freework</groupId>
   <artifactId>freework</artifactId>
   <packaging>jar</packaging>
-  <version>dev</version>
+  <version>prd</version>
   <name>freework</name>
 
   <properties>
