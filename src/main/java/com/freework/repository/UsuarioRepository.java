@@ -2,15 +2,13 @@ package com.freework.repository;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.freework.config.DynamoConfig;
 import com.freework.entity.UsuarioEntity;
 import com.freework.exception.BusinessException;
-import org.apache.http.HttpStatus;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class UsuarioRepository {
@@ -22,20 +20,20 @@ public class UsuarioRepository {
     }
 
     public void salvarCadastroUsuario(UsuarioEntity usuario) throws BusinessException {
-        Map<String, AttributeValue> eav = new HashMap<>();
-        eav.put(":documento", new AttributeValue().withS(usuario.getDocumento()));
-        eav.put(":email", new AttributeValue().withS(usuario.getEmail()));
+        dynamoDBMapper.save(usuario);
+    }
 
-        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression("documento = :documento or email = :email")
+    public PaginatedQueryList<UsuarioEntity> buscarUsuarioPorEmail(String email) {
+        Map<String, AttributeValue> eav = new HashMap<>();
+        eav.put(":email", new AttributeValue().withS(email));
+
+        DynamoDBQueryExpression<UsuarioEntity> queryExpression = new DynamoDBQueryExpression<UsuarioEntity>()
+                .withIndexName("emailIndex")
+                .withKeyConditionExpression("email = :email")
+                .withConsistentRead(false)
                 .withExpressionAttributeValues(eav);
 
-        List<UsuarioEntity> usuarios = dynamoDBMapper.scan(UsuarioEntity.class, scanExpression);
-        if(usuarios.isEmpty()) {
-            dynamoDBMapper.save(usuario);
-        } else {
-            throw new BusinessException("Usuário já existente.");
-        }
+        return dynamoDBMapper.query(UsuarioEntity.class, queryExpression);
     }
 
 }
