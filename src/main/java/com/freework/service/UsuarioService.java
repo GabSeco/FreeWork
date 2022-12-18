@@ -29,17 +29,27 @@ public class UsuarioService {
         usuarioRepository.salvarCadastroUsuario(usuario);
     }
 
-    public String autenticarUsuario(UsuarioDto usuario) throws BusinessException {
+    public UsuarioDto autenticarUsuario(UsuarioDto usuario) throws BusinessException {
         LOGGER.info("Autenticando usuário. Dados: {}", usuario);
         List<UsuarioEntity> usuarios = usuarioRepository.buscarUsuarioPorEmail(usuario.getEmail());
         LOGGER.info("Usuário encontrado: {}", usuarios);
-        if(dadosCorretosParaAutenticacao(usuarios, usuario)) {
-            return "12323131";
-        }
-        throw new BusinessException("Dados de autenticação incorretos.");
+        UsuarioEntity usuarioEntity = dadosCorretosParaAutenticacao(usuarios, usuario);
+        return montarResponseAutenticacao(usuarioEntity);
     }
 
-    public boolean dadosCorretosParaAutenticacao(List<UsuarioEntity> usuarios, UsuarioDto usuario) {
-       return !usuarios.isEmpty() && usuarios.get(0).getSenha().equals(usuario.getSenha());
+    public UsuarioDto montarResponseAutenticacao(UsuarioEntity usuario) {
+        return UsuarioDto.builder()
+                .nome(usuario.getNome())
+                .email(usuario.getEmail())
+                .telefone(usuario.getTelefone())
+                .token("19j1913")
+                .build();
+    }
+
+    public UsuarioEntity dadosCorretosParaAutenticacao(List<UsuarioEntity> usuarios, UsuarioDto usuario) throws BusinessException {
+       if(!usuarios.isEmpty() && usuarios.get(0).getSenha().equals(usuario.getSenha())) {
+           return usuarios.get(0);
+       }
+       throw new BusinessException("Dados de autenticação incorretos.");
     }
 }

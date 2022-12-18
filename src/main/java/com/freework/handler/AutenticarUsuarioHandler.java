@@ -24,10 +24,10 @@ public class AutenticarUsuarioHandler implements RequestHandler<ApiGatewayReques
     @Override
     public ApiGatewayResponse handleRequest(ApiGatewayRequest request, Context context) {
         LOGGER.info("Dados recebidos para login: {}", request);
-        String token;
+        UsuarioDto response;
         try{
             UsuarioDto usuario = new ObjectMapper().convertValue(request.getBody(), UsuarioDto.class);
-            token = usuarioService.autenticarUsuario(usuario);
+            response = usuarioService.autenticarUsuario(usuario);
         }catch (Exception e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
@@ -38,7 +38,7 @@ public class AutenticarUsuarioHandler implements RequestHandler<ApiGatewayReques
         }
         return ApiGatewayResponse.builder()
                 .setStatusCode(HttpStatus.SC_OK)
-                .setObjectBody(token)
+                .setObjectBody(response)
                 .build();
     }
 
