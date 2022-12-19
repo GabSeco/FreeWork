@@ -22,7 +22,6 @@ public class CadastroUsuarioHandler implements RequestHandler<ApiGatewayRequest,
 
 	@Override
 	public ApiGatewayResponse handleRequest(ApiGatewayRequest request, Context context) {
-		LOGGER.info("Dados recebidos para cadastro de usuário: {}", request);
 		try{
 			UsuarioEntity usuario = new ObjectMapper().convertValue(request.getBody(), UsuarioEntity.class);
 			usuarioService.cadastrarUsuario(usuario);
