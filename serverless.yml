@@ -21,5 +21,5 @@ functions:
     timeout: 60
 
   buscarFornecedores:
-    handler: com.freework.handler.buscarFornecedoresHandler
+    handler: com.freework.handler.BuscarFornecedoresHandler
     timeout: 60
