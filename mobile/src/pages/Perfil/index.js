@@ -42,10 +42,10 @@ export default function Perfil(props){
         console.log('ste');
 
     }, []);
-    
+
     return(
         <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
-            
+
             <Header>
                 <TouchableOpacity
                 style={{ flex: 0 }}
@@ -56,7 +56,7 @@ export default function Perfil(props){
 
                 <Titulo>{company?.company?.name}</Titulo>
             </Header>
-            
+
 
 
             <ScrollView
@@ -72,7 +72,7 @@ export default function Perfil(props){
                     <View style={{ marginTop: 0, marginBottom: 10, justifyContent: 'center', display: "flex", flexDirection: "row"}}>
                         <View style={{ marginRight: 15, display: "flex", flexDirection: 'row' }}>
                             <MaterialCommunityIcons name="tag-text-outline" size={18} color="black" />
-                            <Categoria>{company?.company?.Category.name}</Categoria>
+                            <Categoria>{company?.company?.category}</Categoria>
                         </View>
                         <View style={{ display: "flex", flexDirection: 'row' }}>
                             <AntDesign name="star" size={18} color="#E9E133" />
@@ -95,10 +95,10 @@ export default function Perfil(props){
                             navigation.navigate('Servico', {
                                 service: {id: item.id, name: item.name, description: item.description, price: item.price},
                                 company: {
-                                    id: company?.company?.id, 
-                                    name: company?.company?.name, 
+                                    id: company?.company?.id,
+                                    name: company?.company?.name,
                                     image: company?.company?.image,
-                                    category: company?.company?.Category?.name,
+                                    category: company?.company?.category,
                                 }
                             })
                         }}

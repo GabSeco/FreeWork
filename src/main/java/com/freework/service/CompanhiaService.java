@@ -27,6 +27,6 @@ public class CompanhiaService {
     }
 
     public boolean existeFiltroParaBusca(Map<String, String> requestParams) {
-        return requestParams.isEmpty();
+        return !requestParams.isEmpty();
     }
 }

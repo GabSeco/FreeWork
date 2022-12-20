@@ -10,7 +10,9 @@ export default function CardPerfil(props){
     return(
         <Background>
             <LogoArea>
-                <Image style={{ borderRadius: 50, alignSelf: 'center', width: 58, height: 58 }} source={{uri: props.item.image || 'https://mvst-website.s3.eu-central-1.amazonaws.com/freework_logo_fbdf6c05b9.png'}}/>
+                <Image style={{ borderRadius: 50, alignSelf: 'center', width: 58, height: 58 }} 
+                source={{uri: props.item.image || 
+                    'https://mvst-website.s3.eu-central-1.amazonaws.com/freework_logo_fbdf6c05b9.png'}}/>
             </LogoArea>
             <InfoArea>
                 <Titulo>
@@ -19,7 +21,7 @@ export default function CardPerfil(props){
                 <View style={{ marginVertical: 9, display: "flex", flexDirection: "row" }}>
                     <View style={{ marginRight: 12, display: "flex", flexDirection: "row" }}>
                         <MaterialCommunityIcons name="tag-text-outline" size={16} color="#868686" />
-                        <Categoria>{props.item.Category.name}</Categoria>
+                        <Categoria>{props.item.category}</Categoria>
                     </View>
                     <View style={{ display: "flex", flexDirection: "row" }}>
                         <AntDesign name="star" size={16} color="#E9E133" />
