@@ -28,8 +28,7 @@ export default function Servico(props){
             servicoNome: service?.name,
             servicoDescricao: service?.description,
             servicoValor: parseFloat(service?.price),
-            servicoValorFormatado: service?.price,
-            pagamento: "dinheiro"
+            servicoValorFormatado: service?.price
         }
 
         dispatch(adicionar_servico(dadosCarrinho));

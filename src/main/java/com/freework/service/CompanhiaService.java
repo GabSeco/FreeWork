@@ -22,8 +22,13 @@ public class CompanhiaService {
 
     public List<CompanhiaEntity> buscarCompanhias(Map<String, String> requestParams) {
         return existeFiltroParaBusca(requestParams) ?
-                companhiaRepository.buscarCompanhiasPorCategoria(requestParams.get("filter")) :
-                companhiaRepository.buscarCompanhias();
+            buscarCompanhiasComFiltro(requestParams) : companhiaRepository.buscarCompanhias();
+    }
+
+    public List<CompanhiaEntity> buscarCompanhiasComFiltro(Map<String, String> requestParams) {
+        return requestParams.containsKey("filter") ? 
+            companhiaRepository.buscarCompanhiasPorCategoria(requestParams.get("filter")) :
+            companhiaRepository.buscarCompanhiaPeloId(requestParams.get("id"));
     }
 
     public boolean existeFiltroParaBusca(Map<String, String> requestParams) {

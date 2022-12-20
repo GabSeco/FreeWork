@@ -108,43 +108,6 @@ export default function Pedido(props){
                         R$ {order?.price}
                     </TextoTotal>
                 </View>
-
-                <Topico style={{ marginTop: 20, marginBottom: 7, borderBottomWidth: 1, borderBottomColor: '#c6c6c670', paddingBottom: 5 }}>
-                    Agendamento
-                </Topico>
-
-                
-                <View style={{ display: 'flex', flexDirection: 'row' }}>
-                    <AntDesign style={{ alignSelf: 'center', paddingRight: 13 }} name="calendar" size={24} color="#6B6B6B" />
-                    <View style={{ display: 'flex', flexDirection: 'column' }}>
-                        <TituloPrimario>
-                            Dia 07/05/2022
-                        </TituloPrimario>
-                        <SubtextoPrimario>
-                            17:50 ~ 18:00
-                        </SubtextoPrimario>
-                    </View>
-                </View>
-                    
-
-                <Topico style={{ marginTop: 30, marginBottom: 7, borderBottomWidth: 1, borderBottomColor: '#c6c6c670', paddingBottom: 5 }}>
-                    Pagamento
-                </Topico>
-
-                <View style={{ display: 'flex', flexDirection: 'row' }}>
-                    <FontAwesome5 
-                    style={{ alignSelf: 'center', paddingRight: 13 }}
-                    name="money-check" size={19} color="#6B6B6B" />
-
-                    <View style={{ display: 'flex', flexDirection: 'column' }}>
-                        <TituloPrimario>
-                            {order?.paymentMethod}
-                        </TituloPrimario>
-                        <SubtextoPrimario>
-                            Pagamento realizado na hora do serviço
-                        </SubtextoPrimario>
-                    </View>
-                </View>
             </ScrollView>
         </SafeAreaView>
     )

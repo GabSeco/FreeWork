@@ -27,10 +27,14 @@ export default function Contratacao(){
         setLoadingFull(true);
 
         const newOrder = {
+            email: userData.email,
             CompanyId: servicoInfo.empresaId,
             ServiceId: servicoInfo.servicoId,
-            price: servicoInfo.servicoValor + (servicoInfo.servicoValor / 10),
-            paymentMethod: servicoInfo.pagamento
+            description: servicoInfo.servicoDescricao,
+            serviceName: servicoInfo.servicoNome,
+            companyImage: servicoInfo.empresaImage,
+            companyName: servicoInfo.empresaNome,
+            price: servicoInfo.servicoValor + (servicoInfo.servicoValor / 10)
         }
 
         await api.post('/order', newOrder, {headers: {Authorization: `Bearer ${userData.token}`}})
@@ -120,56 +124,6 @@ export default function Contratacao(){
                         R$ {servicoInfo.servicoValor + (servicoInfo.servicoValor / 10)}
                     </TextoTotal>
                 </View>
-
-                <Topico style={{ marginTop: 15, marginBottom: 7, borderBottomWidth: 1, borderBottomColor: '#c6c6c670', paddingBottom: 5 }}>
-                    Agendamento
-                </Topico>
-
-                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <View style={{ display: 'flex', flexDirection: 'row' }}>
-                        <AntDesign style={{ alignSelf: 'center', paddingRight: 13 }} name="calendar" size={24} color="#6B6B6B" />
-                        <View style={{ display: 'flex', flexDirection: 'column' }}>
-                            <TituloPrimario>
-                                Dia 07/05/2022
-                            </TituloPrimario>
-                            <SubtextoPrimario>
-                                17:50 ~ 18:00
-                            </SubtextoPrimario>
-                        </View>
-                    </View>
-                    <Trocar>
-                        Trocar
-                    </Trocar>
-                </View>
-
-                <Topico style={{ marginTop: 30, marginBottom: 7, borderBottomWidth: 1, borderBottomColor: '#c6c6c670', paddingBottom: 5 }}>
-                    Pagamento
-                </Topico>
-
-                <View style={{ marginBottom: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <View style={{ display: 'flex', flexDirection: 'row' }}>
-                        <FontAwesome5 
-                        style={{ alignSelf: 'center', paddingRight: 13 }}
-                        name={servicoInfo.pagamento === "dinheiro" ? "money-bill-alt" :"money-check"} size={19} color="#6B6B6B" />
-
-                        <View style={{ display: 'flex', flexDirection: 'column' }}>
-                            <TituloPrimario>
-                                {servicoInfo.pagamento === "dinheiro" ? "Dinheiro" : "Cartão"}
-                            </TituloPrimario>
-                            <SubtextoPrimario>
-                                Pagamento realizado na hora do serviço
-                            </SubtextoPrimario>
-                        </View>
-                    </View>
-                    <TouchableOpacity
-                    onPress={() => setModalVisible(true)}
-                    >
-                        <Trocar>
-                            Trocar
-                        </Trocar>
-                    </TouchableOpacity>
-                </View>
-
                 <Button style={{ marginTop: 25 }}>
                     <ButtonText
                     onPress={() => apiOrderService()}
@@ -178,26 +132,6 @@ export default function Contratacao(){
                     </ButtonText>
                 </Button>
             </ScrollView>
-
-            <MyModal modalVisible={modalVisible} setModalVisible={setModalVisible}>
-                <TituloModal>
-                    Selecione o metódo de pagamento
-                </TituloModal>
-                <TouchableOpacity
-                onPress={() => {setServicoInfo({...servicoInfo, pagamento: "dinheiro"}), setModalVisible(false)}}
-                >
-                    <OpcaoModal>
-                        Dinheiro
-                    </OpcaoModal>
-                </TouchableOpacity>
-                <TouchableOpacity
-                onPress={() => {setServicoInfo({...servicoInfo, pagamento: "cartao"}), setModalVisible(false)}}
-                >
-                    <OpcaoModal>
-                        Cartão de crédito/débito
-                    </OpcaoModal>
-                </TouchableOpacity>
-            </MyModal>
 
             <LoadingFull open={loadingFull}/>
         </SafeAreaView>

@@ -10,9 +10,7 @@ export default function CardPerfil(props){
     return(
         <Background>
             <LogoArea>
-                <Image style={{ borderRadius: 50, alignSelf: 'center', width: 58, height: 58 }} 
-                source={{uri: props.item.image || 
-                    'https://mvst-website.s3.eu-central-1.amazonaws.com/freework_logo_fbdf6c05b9.png'}}/>
+                <Image style={{ borderRadius: 50, alignSelf: 'center', width: 58, height: 58 }} source={{uri: props.item.image || 'https://mvst-website.s3.eu-central-1.amazonaws.com/freework_logo_fbdf6c05b9.png'}}/>
             </LogoArea>
             <InfoArea>
                 <Titulo>

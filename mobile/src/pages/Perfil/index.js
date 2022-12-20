@@ -24,7 +24,7 @@ export default function Perfil(props){
         setLoadingFull(true);
 
         await api
-        .get(`/company/${props.route?.params?.companyId}`, {headers: { authorization: `Bearer ${userData.token}` }})
+        .get(`/company/${'?id='+props.route?.params?.companyId}`, {headers: { authorization: `Bearer ${userData.token}` }})
         .then((response) => {
             console.log(response.data);
             setCompany(response.data);
@@ -42,7 +42,7 @@ export default function Perfil(props){
         console.log('ste');
 
     }, []);
-
+    
     return(
         <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
 
@@ -53,10 +53,9 @@ export default function Perfil(props){
                 >
                     <AntDesign name="arrowleft" size={24} color="#DBD4D3" />
                 </TouchableOpacity>
-
-                <Titulo>{company?.company?.name}</Titulo>
+                <Titulo>{company?.name}</Titulo>
             </Header>
-
+            
 
 
             <ScrollView
@@ -66,13 +65,13 @@ export default function Perfil(props){
                     <LogoArea>
                         <Image
                         style={{ width: 82, height: 82, borderRadius: 50 }}
-                        source={{uri: company?.company?.image || 'https://mvst-website.s3.eu-central-1.amazonaws.com/freework_logo_fbdf6c05b9.png'}} />
+                        source={{uri: company?.image || 'https://mvst-website.s3.eu-central-1.amazonaws.com/freework_logo_fbdf6c05b9.png'}} />
                     </LogoArea>
 
                     <View style={{ marginTop: 0, marginBottom: 10, justifyContent: 'center', display: "flex", flexDirection: "row"}}>
                         <View style={{ marginRight: 15, display: "flex", flexDirection: 'row' }}>
                             <MaterialCommunityIcons name="tag-text-outline" size={18} color="black" />
-                            <Categoria>{company?.company?.category}</Categoria>
+                            <Categoria>{company?.category}</Categoria>
                         </View>
                         <View style={{ display: "flex", flexDirection: 'row' }}>
                             <AntDesign name="star" size={18} color="#E9E133" />
@@ -81,7 +80,7 @@ export default function Perfil(props){
                     </View>
 
                     <Descricao>
-                        {company?.company?.description}
+                        {company?.description}
                     </Descricao>
                 </Area>
 
@@ -95,10 +94,11 @@ export default function Perfil(props){
                             navigation.navigate('Servico', {
                                 service: {id: item.id, name: item.name, description: item.description, price: item.price},
                                 company: {
-                                    id: company?.company?.id,
-                                    name: company?.company?.name,
-                                    image: company?.company?.image,
-                                    category: company?.company?.category,
+                                    id: company?.id, 
+                                    name: company?.name, 
+                                    image: company?.image,
+                                    category: company?.category,
+                                    services: company?.services
                                 }
                             })
                         }}

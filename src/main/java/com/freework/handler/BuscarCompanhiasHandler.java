@@ -33,6 +33,13 @@ public class BuscarCompanhiasHandler implements RequestHandler<ApiGatewayRequest
         try{
             companhias = companhiaService.buscarCompanhias(request.getQueryParams());
             LOGGER.info("Companhias encontradas: {}", companhias);
+
+            if(request.getQueryParams().containsKey("id")) {
+                return ApiGatewayResponse.builder()
+                .setStatusCode(HttpStatus.SC_OK)
+                .setObjectBody(companhias.get(0))
+                .build();
+            }
         }catch (Exception e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();

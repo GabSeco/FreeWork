@@ -14,7 +14,9 @@ import com.freework.config.DynamoConfig;
 import com.freework.entity.CompanhiaEntity;
 import com.freework.exception.BusinessException;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CompanhiaRepository {
@@ -27,10 +29,14 @@ public class CompanhiaRepository {
 
     public PaginatedScanList<CompanhiaEntity> buscarCompanhias() {
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
-        scanExpression.addFilterCondition("category",
-                new Condition().withComparisonOperator(ComparisonOperator.NOT_NULL.toString()));
+        scanExpression.addFilterCondition("category", 
+        new Condition().withComparisonOperator(ComparisonOperator.NOT_NULL.toString()));
 
         return dynamoDBMapper.scan(CompanhiaEntity.class, scanExpression);
+    }
+
+    public List<CompanhiaEntity> buscarCompanhiaPeloId(String id) {
+        return Arrays.asList(dynamoDBMapper.load(CompanhiaEntity.class, Integer.valueOf(id)));
     }
 
     public PaginatedQueryList<CompanhiaEntity> buscarCompanhiasPorCategoria(String categoria) {
