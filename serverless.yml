@@ -20,6 +20,6 @@ functions:
     handler: com.freework.handler.AutenticarUsuarioHandler
     timeout: 60
 
-  buscarFornecedores:
-    handler: com.freework.handler.BuscarFornecedoresHandler
+  buscarCompanhias:
+    handler: com.freework.handler.BuscarCompanhiasHandler
     timeout: 60

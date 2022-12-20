@@ -11,5 +11,5 @@ public class ApiGatewayRequest {
 
     private Map<String, String> headers;
     private Map<String, String> body;
-
+    private Map<String, String> queryParams;
 }
