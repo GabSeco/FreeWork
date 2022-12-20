@@ -6,27 +6,33 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.freework.ApiGatewayRequest;
 import com.freework.ApiGatewayResponse;
 import com.freework.dto.UsuarioDto;
-import com.freework.service.FornecedoresService;
+import com.freework.entity.CompanhiaEntity;
+import com.freework.service.CompanhiaService;
 import com.freework.service.UsuarioService;
+
+import java.util.List;
+import java.util.Objects;
+
 import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class BuscarFornecedoresHandler implements RequestHandler<ApiGatewayRequest, ApiGatewayResponse> {
+public class BuscarCompanhiasHandler implements RequestHandler<ApiGatewayRequest, ApiGatewayResponse> {
 
-    private static final Logger LOGGER = LogManager.getLogger(BuscarFornecedoresHandler.class);
-    private FornecedoresService fornecedoresService;
+    private static final Logger LOGGER = LogManager.getLogger(BuscarCompanhiasHandler.class);
+    private CompanhiaService companhiaService;
 
-    public BuscarFornecedoresHandler() {
-        fornecedoresService = new FornecedoresService();
+    public BuscarCompanhiasHandler() {
+        companhiaService = new CompanhiaService();
     }
 
     @Override
     public ApiGatewayResponse handleRequest(ApiGatewayRequest request, Context context) {
         LOGGER.info("Dados recebidos para busca: {}", request);
-        String response = "";
+        List<CompanhiaEntity> companhias;
         try{
-            String filtro = request.getBody().get("filtro");
+            companhias = companhiaService.buscarCompanhias(request.getQueryParams());
+            LOGGER.info("Companhias encontradas: {}", companhias);
         }catch (Exception e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
@@ -37,7 +43,7 @@ public class BuscarFornecedoresHandler implements RequestHandler<ApiGatewayReque
         }
         return ApiGatewayResponse.builder()
                 .setStatusCode(HttpStatus.SC_OK)
-                .setObjectBody(response)
+                .setObjectBody(companhias)
                 .build();
     }
 
