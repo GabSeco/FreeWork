@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView, ScrollView, TouchableOpacity, View, Text } from "react-native";
 import CardPedido from "../../components/CardPedido";
+import { Background, InfoArea, IconArea, Titulo, Servico, Info, Categoria, Divider } from "../../components/CardPedido/styled";
 import Header from "../../components/Header";
 
 import api from "../../services/api";
@@ -89,11 +90,20 @@ export default function Servicos(){
 
                 {!loading &&
                     <>
-                        {
+                        {orders?.length > 0 ? 
+                            orders?.map((item) => (
+                                <TouchableOpacity
+                                key={item.id}
+                                onPress={() => navigation.navigate('Pedido', {id: item.id})}
+                                >
+                                   <Titulo>{item.companyName}</Titulo>
+                                   <Text>{item.description}</Text>
+                                   <Text>{item.price}</Text>
+                                </TouchableOpacity>
+                            ))
+                        :
                             <View style={{ marginTop: 10, alignItems: 'center' }}>
                                 <Text>não possui nenhum serviço contratado.</Text>
-
-                            
                             </View>
 
                             
