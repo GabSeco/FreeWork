@@ -23,3 +23,11 @@ functions:
   buscarCompanhias:
     handler: com.freework.handler.BuscarCompanhiasHandler
     timeout: 60
+
+  contratarServico:
+    handler: com.freework.handler.ContratarServicoHandler
+    timeout: 60
+  
+  buscarServicos:
+    handler: com.freework.handler.BuscarServicosHandler
+    timeout: 60

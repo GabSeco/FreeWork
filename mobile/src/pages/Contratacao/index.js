@@ -28,8 +28,8 @@ export default function Contratacao(){
 
         const newOrder = {
             email: userData.email,
-            CompanyId: servicoInfo.empresaId,
-            ServiceId: servicoInfo.servicoId,
+            companyId: servicoInfo.empresaId,
+            serviceId: servicoInfo.servicoId,
             description: servicoInfo.servicoDescricao,
             serviceName: servicoInfo.servicoNome,
             companyImage: servicoInfo.empresaImage,

@@ -17,7 +17,8 @@ export default function Servicos(){
 
     const getOrders = async () => {
         await api
-        .get(`/order`, {headers: { authorization: `Bearer ${userData.token}` }})
+        .get(`/services/order${'?email='+userData.email}`, {headers: { authorization: `Bearer ${userData.token}` }})
+      //  .get(`/order`, {headers: { authorization: `Bearer ${userData.token}` }})
         .then((response) => {
             console.log(response.data);
             setOrders(response.data);
@@ -88,19 +89,14 @@ export default function Servicos(){
 
                 {!loading &&
                     <>
-                        {orders?.length > 0 ? 
-                            orders?.map((item) => (
-                                <TouchableOpacity
-                                key={item.id}
-                                onPress={() => navigation.navigate('Pedido', {id: item.id})}
-                                >
-                                    <CardPedido item={item}/>
-                                </TouchableOpacity>
-                            ))
-                        :
+                        {
                             <View style={{ marginTop: 10, alignItems: 'center' }}>
                                 <Text>não possui nenhum serviço contratado.</Text>
+
+                            
                             </View>
+
+                            
                         }
                     </>
                 }
