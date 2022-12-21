@@ -97,8 +97,8 @@ export default function Servicos(){
                                 onPress={() => navigation.navigate('Pedido', {id: item.id})}
                                 >
                                    <Titulo>{item.companyName}</Titulo>
-                                   <Text>{item.description}</Text>
-                                   <Text>{item.price}</Text>
+                                   <Text>Serviço: {item.description}</Text>
+                                   <Text>Valor: {item.price}</Text>
                                 </TouchableOpacity>
                             ))
                         :
